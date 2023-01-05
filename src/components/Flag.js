@@ -1,15 +1,17 @@
 import Board from "./Board";
 import { COLORS } from "../utils/colors";
 import { useEffect, useState } from "react";
+import { getDatabase, ref, onValue } from "firebase/database";
 
 const Flag = () => {
   const [yellow, setYellow] = useState([]);
   const [blue, setBlue] = useState([]);
 
   useEffect(() => {
-    async function fetchData() {
-      const res = await fetch("/data.json");
-      const data = await res.json();
+    const db = getDatabase();
+    const dataRef = ref(db, "data");
+    onValue(dataRef, (snapshot) => {
+      const data = snapshot.val();
       const b = [];
       const y = [];
       for (const { name, date, text, type } of data) {
@@ -21,8 +23,7 @@ const Flag = () => {
       }
       setBlue(b);
       setYellow(y);
-    }
-    fetchData();
+    });
   }, []);
 
   return (
