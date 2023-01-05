@@ -4,11 +4,28 @@ const CELL_COUNT = 10000;
 const CELL_MIN_SIZE = 4;
 const MIN_COLUMN_COUNT = Math.trunc(Math.sqrt(CELL_COUNT));
 
-const Board = ({ color = "pink", name = "unknown" }) => {
+const Board = ({ color = "pink", list = [], name: propName = "unknown" }) => {
   const renderCells = () => {
     const result = [];
-    for (let i = 1; i <= CELL_COUNT; i++) {
-      result.push(<Cell size={CELL_MIN_SIZE} title={name + " " + i} />);
+    for (let i = 0; i < CELL_COUNT; i++) {
+      const { name, text, date } = list?.[i] ?? {};
+      const phrases = [`${propName} ${i + 1}`];
+      if (name) {
+        phrases[0] = name;
+      }
+      if (text) {
+        phrases.push(`said "${text}"`);
+      }
+      if (date) {
+        phrases.push(`on ${date}`);
+      }
+      result.push(
+        <Cell
+          key={phrases[0] + i}
+          size={CELL_MIN_SIZE}
+          title={phrases.join(" ")}
+        />
+      );
     }
     return result;
   };
