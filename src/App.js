@@ -1,17 +1,17 @@
-import Board from "./components/Board";
-import { COLORS } from "./utils/colors";
+import Flag from "./components/Flag";
 
 function App() {
   return (
     <div
       style={{
         display: "flex",
-        flexDirection: "column",
         justifyContent: "center",
+        alignItems: "center",
+        height: "100vh",
+        width: "100vw",
       }}
     >
-      <Board color={COLORS.yellow} />
-      <Board color={COLORS.blue} />
+      <Flag />
     </div>
   );
 }
