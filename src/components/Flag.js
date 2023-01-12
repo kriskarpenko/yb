@@ -11,16 +11,18 @@ const Flag = () => {
     const db = getDatabase();
     const dataRef = ref(db, "data");
     onValue(dataRef, (snapshot) => {
-      const data = snapshot.val();
+      const dataItems = snapshot.val();
       const b = [];
       const y = [];
-      for (const { name, date, text, type } of data) {
+      for (let index = 0; index < dataItems.length; index++) {
+        const { name, date, text, type } = dataItems[index];
         if (type === "b") {
-          b.push({ name, date, text });
+          b.push({ name, date, text, index });
         } else {
-          y.push({ name, date, text });
+          y.push({ name, date, text, index });
         }
       }
+      console.log("b length:", b.length, "y length:", y.length);
       setBlue(b);
       setYellow(y);
     });

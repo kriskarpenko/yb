@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Cell from "./Cell";
 
 const CELL_COUNT = 10000;
@@ -7,8 +8,9 @@ const MIN_COLUMN_COUNT = Math.trunc(Math.sqrt(CELL_COUNT));
 const Board = ({ color = "pink", list = [], name: propName = "unknown" }) => {
   const renderCells = () => {
     const result = [];
-    for (let i = 0; i < CELL_COUNT; i++) {
-      const { name, text, date } = list?.[i] ?? {};
+    const numberOfCells = CELL_COUNT;
+    for (let i = 0; i < numberOfCells; i++) {
+      const { name, text, date, index } = list?.[i] ?? {};
       const phrases = [`${propName} ${i + 1}`];
       if (name) {
         phrases[0] = name;
@@ -19,12 +21,19 @@ const Board = ({ color = "pink", list = [], name: propName = "unknown" }) => {
       if (date) {
         phrases.push(`on ${date}`);
       }
+
       result.push(
-        <Cell
-          key={phrases[0] + i}
-          size={CELL_MIN_SIZE}
-          title={phrases.join(" ")}
-        />
+        index ? (
+          <Link to={`info/${index}`}>
+            <Cell
+              key={phrases[0] + i}
+              size={CELL_MIN_SIZE}
+              title={phrases.join(" ")}
+            />
+          </Link>
+        ) : (
+          <Cell key={phrases[0] + i} size={CELL_MIN_SIZE} />
+        )
       );
     }
     return result;

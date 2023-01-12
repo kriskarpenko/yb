@@ -1,19 +1,7 @@
-import Flag from "./components/Flag";
+import AppRoutes from "./routes";
 
 function App() {
-  return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        height: "100vh",
-        width: "100vw",
-      }}
-    >
-      <Flag />
-    </div>
-  );
+  return <AppRoutes />;
 }
 
 export default App;
