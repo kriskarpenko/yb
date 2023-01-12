@@ -27,8 +27,8 @@ const Board = ({ color = "pink", list = [], name: propName = "unknown" }) => {
 
       result.push(
         index ? (
-          <Link to={`info/${index}`}>
-            <Cell key={phrases[0] + i} title={phrases.join(" ")} />
+          <Link key={phrases[0] + i} to={`info/${index}`}>
+            <Cell title={phrases.join(" ")} />
           </Link>
         ) : (
           <Cell key={phrases[0] + i} />
