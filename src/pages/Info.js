@@ -3,22 +3,22 @@ import { useParams } from "react-router-dom";
 import { getDatabase, ref, onValue } from "firebase/database";
 
 const InfoPage = () => {
-  const { index } = useParams();
+  const { id } = useParams();
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     setLoading(true);
     const db = getDatabase();
-    const dataRef = ref(db, `data/${index}`);
+    const dataRef = ref(db, `data/${id}`);
     onValue(dataRef, (snapshot) => {
       const data = snapshot.val();
       setData(data);
       setLoading(false);
     });
-  }, [index]);
+  }, [id]);
 
-  console.log("InfoPage() - index:", index);
+  console.log("InfoPage() - id:", id);
 
   if (loading) return <div>Loading...</div>;
 
