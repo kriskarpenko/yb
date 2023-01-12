@@ -1,0 +1,23 @@
+.board {
+  display: grid;
+}
+
+/* Cell compponent */
+.board div {
+  width: 4px;
+  height: 4px;
+}
+
+.flag {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.flag-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+}
