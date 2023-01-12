@@ -11,33 +11,45 @@ const Flag = () => {
     const db = getDatabase();
     const dataRef = ref(db, "data");
     onValue(dataRef, (snapshot) => {
-      const dataItems = snapshot.val();
+      const dataAsObject = snapshot.val();
+      const objectKeys = Object.keys(dataAsObject);
       const b = [];
       const y = [];
-      for (let index = 0; index < dataItems.length; index++) {
-        const { name, date, text, type } = dataItems[index];
-        if (type === "b") {
-          b.push({ name, date, text, index });
+      // for (let i = 0; i < objectKeys.length; i++) {
+      //   const { name, date, text, type } = dataAsObject[objectKeys[i]] ?? {};
+      //   if (["b", "B", "Blue", "blue"].includes(type)) {
+      //     b.push({ name, date, text, index: objectKeys[i] });
+      //   } else {
+      //     y.push({ name, date, text, index: objectKeys[i] });
+      //   }
+      // }
+      for (const key of objectKeys) {
+        const { name, date, text, type } = dataAsObject[key] ?? {};
+        const newItem = { name, date, text, index: key };
+        if (["b", "blue"].includes(type?.toLowerCase())) {
+          b.push(newItem);
         } else {
-          y.push({ name, date, text, index });
+          y.push(newItem);
         }
       }
-      console.log("b length:", b.length, "y length:", y.length);
+      // const items = objectKeys.map((key) => dataAsObject[key]);
+      // const blueItems = items.filter(({ type }) =>
+      //   ["b", "blue"].includes(type?.toLowerCase())
+      // );
+      // const yellowItems = items.filter(({ type }) =>
+      //   ["y", "yellow"].includes(type?.toLowerCase())
+      // );
+      // console.log(blueItems, yellowItems);
+
       setBlue(b);
       setYellow(y);
     });
   }, []);
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-      }}
-    >
-      <Board color={COLORS.blue} list={blue} name="Not Yellow" />
-      <Board color={COLORS.yellow} list={yellow} name="Not Blue" />
+    <div className="flag">
+      <Board color={COLORS.blue} list={blue} name="Blue" />
+      <Board color={COLORS.yellow} list={yellow} name="Yellow" />
     </div>
   );
 };
