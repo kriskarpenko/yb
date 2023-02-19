@@ -46,6 +46,11 @@ const Flag = () => {
     });
   }, []);
 
+  const dataReady = blue.length > 0 && yellow.length > 0;
+  if (!dataReady) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div className="flag">
       <Board color={COLORS.blue} list={blue} name="Blue" />

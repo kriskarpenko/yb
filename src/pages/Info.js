@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { getDatabase, ref, onValue } from "firebase/database";
 
 const InfoPage = () => {
