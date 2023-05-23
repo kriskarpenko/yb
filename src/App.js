@@ -21,8 +21,8 @@ function App() {
   };
 
   return (
-    <div className={className} contentEditable>
-      <input onKeyDown={handleKeyDown} value={count} />
+    <div className={className}>
+      {/* <input onKeyDown={handleKeyDown} value={count.toString()} /> */}
       <AppRoutes />
     </div>
   );

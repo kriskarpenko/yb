@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import { getDatabase, ref, onValue } from "firebase/database";
+import PersistentEditor from "../components/editors/PersistentEditor";
+import div from "../components/editors/PersistentContainer";
+import PersistentContext from "../components/editors/PersistentContext";
 
 const InfoPage = () => {
   const { id } = useParams();
@@ -33,6 +36,24 @@ const InfoPage = () => {
       Text: {data?.text}
       <br />
       Date: {data?.date}
+      <br />
+      <PersistentContext defaultValue="123">
+        <div>
+          <PersistentEditor />
+          <br />
+          <PersistentEditor />
+          <br />
+          <PersistentEditor />
+        </div>
+      </PersistentContext>
+      <br />
+      <PersistentContext defaultValue="456">
+        <div>
+          <PersistentEditor />
+          <br />
+          <PersistentEditor />
+        </div>
+      </PersistentContext>
     </div>
   );
 };
